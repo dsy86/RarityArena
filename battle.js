@@ -75,14 +75,14 @@ function CalcAtkInterval(speed)
     return number(Math.pow(1000 / (30 + speed / 10), 3) / 60)
 }
 
-function EndBattle()
+function EndCombat()
 {
     clearTimeout(p1.attackTimer);
     clearTimeout(p2.attackTimer);
     DisableInput(false);
 }
 
-function StartBattle() 
+function StartCombat() 
 {
     clearTimeout(p1.attackTimer)
     clearTimeout(p2.attackTimer)
@@ -521,7 +521,7 @@ function DoAttack(spellID, attacker, victimStat, attackerStat, victimStatMax, at
             text2 = lang.spellDefault;
             break;
     }
-    $('Text').value += text.replace(/%attacker%/g, attackerName).replace(/%victim%/g, victimName) + "\r\n";
+    //$('Text').value += text.replace(/%attacker%/g, attackerName).replace(/%victim%/g, victimName) + "\r\n";
     $("Text").value += /*"【技能ID:" + spellID + "】 " + */text2.format({attacker:attackerName, victim:victimName, damage:damage}) + "\r\n";
 
     for (var i = 0; i < 8; i++) {
@@ -536,6 +536,6 @@ function DoAttack(spellID, attacker, victimStat, attackerStat, victimStatMax, at
     if (p1.stat[0] <= 0 || p2.stat[0] <= 0)
     {
         $('Text').value += lang.winner.format({winner:p1.stat[0] <= 0 ? p2.name : p1.name});
-        EndBattle();
+        EndCombat();
     }
 }
